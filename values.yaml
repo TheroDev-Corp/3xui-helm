@@ -1,40 +1,40 @@
-# -- Настройки образа
+# Image settings
 image:
   repository: ghcr.io/mhsanaei/3x-ui
   pullPolicy: IfNotPresent
   tag: "latest"
 
-# -- Использовать ли сеть хоста (необходимо для VPN-протоколов)
+# Host network settings (required for VPN protocols)
 hostNetwork: true
 
-# -- Переменные окружения (из docker-compose)
+# Environment variables (from docker-compose)
 env:
   XRAY_VMESS_AEAD_FORCED: "false"
   XUI_ENABLE_FAIL2BAN: "true"
 
-# -- Настройки хранилища для SQLite (/etc/x-ui/)
+# Storage settings for SQLite (/etc/x-ui/)
 persistence:
   enabled: true
-  # Оставь пустым, чтобы k3s использовал дефолтный local-path provisioner
+  # Leave empty to use the default local-path provisioner in k3s
   storageClassName: ""
   accessMode: ReadWriteOnce
   size: 1Gi
 
-# -- Порты приложения
+# Application ports
 service:
   type: ClusterIP
   panelPort: 2053
   subPort: 2096
 
-# -- Настройки Ingress (Маршрутизация)
+# Ingress settings (Routing)
 ingress:
   enabled: true
-  className: "traefik" # Дефолтный ingress-контроллер в k3s
+  className: "traefik" # Default ingress controller in k3s
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod" # Укажи свой ClusterIssuer
+    cert-manager.io/cluster-issuer: "letsencrypt-prod" # Specify your ClusterIssuer
 
   host: admin-panel.example.com
-  tlsSecretName: 3xui-tls-secret # В этот секрет cert-manager положит tls.crt и tls.key
+  tlsSecretName: 3xui-tls-secret # cert-manager will put tls.crt and tls.key in this secret
 
 serviceAccount:
   create: true
