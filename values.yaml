@@ -1,3 +1,5 @@
+nameOverride: "xui"
+fullnameOverride: "xui-panel"
 # Image settings
 image:
   repository: ghcr.io/mhsanaei/3x-ui
