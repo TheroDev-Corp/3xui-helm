@@ -36,13 +36,11 @@ ingress:
   host: admin-panel.example.com
   tlsSecretName: 3xui-tls-secret # В этот секрет cert-manager положит tls.crt и tls.key
 
-# -- Настройки ServiceAccount
 serviceAccount:
   create: true
   name: ""
 
-# -- Лимиты ресурсов (раскомментируй и настрой под свои нужды)
-resources: {}
+resources:
   requests:
     cpu: 500m
     memory: 512Mi
@@ -51,4 +49,4 @@ resources: {}
     memory: 1Gi
 
 nodeSelector: {}
-tolerations:
+tolerations: []
