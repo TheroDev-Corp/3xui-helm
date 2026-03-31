@@ -1,17 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: { { include "3xui.fullname" . } }
-  labels: { { - include "3xui.labels" . | nindent 4 } }
+  name: {{ include "3xui.fullname" . }}
+  labels:
+    {{- include "3xui.labels" . | nindent 4 }}
 spec:
-  type: { { .Values.service.type } }
+  type: {{ .Values.service.type }}
   ports:
-    - port: { { .Values.service.panelPort } }
-      targetPort: { { .Values.service.panelPort } }
+    - port: {{ .Values.service.panelPort }}
+      targetPort: {{ .Values.service.panelPort }}
       protocol: TCP
       name: panel
-    - port: { { .Values.service.subPort } }
-      targetPort: { { .Values.service.subPort } }
+    - port: {{ .Values.service.subPort }}
+      targetPort: {{ .Values.service.subPort }}
       protocol: TCP
       name: sub
-  selector: { { - include "3xui.selectorLabels" . | nindent 4 } }
+  selector:
+    {{- include "3xui.selectorLabels" . | nindent 4 }}
